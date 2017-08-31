@@ -8,9 +8,9 @@ import br.com.caelum.tarefas.model.Tarefa;
 
 public class RemoveTarefaAction {
 	
-	private Tarefa tarefa;
+	private Long id;
 	
-	@Action(value="removeTarefa", results= {
+	/*@Action(value="removeTarefa", results= {
 			@Result(name="ok", type="redirectAction", 
 					params= {
 						"actionName", "listaTarefas"	
@@ -19,14 +19,20 @@ public class RemoveTarefaAction {
 	public String execute() {
 		new TarefaDAO().remove(tarefa);
 		return "ok";
+	}*/
+	
+	@Action(value="removeTarefa", results= {@Result(name="ok", type="httpheader", params= {"status","200"})})
+	public String execute() {
+		new TarefaDAO().remove(id);
+		return "ok";
 	}
 	
-	public Tarefa getTarefa() {
-		return tarefa;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
-	public void setTarefa(Tarefa tarefa) {
-		this.tarefa = tarefa;
+	public Long getId() {
+		return id;
 	}
 	
 }

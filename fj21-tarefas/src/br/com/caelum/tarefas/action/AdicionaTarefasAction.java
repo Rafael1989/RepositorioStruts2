@@ -23,7 +23,7 @@ public class AdicionaTarefasAction extends ActionSupport{
 	
 	@Action(value="adicionaTarefa", results= {
 			@Result(name="ok", location="tarefa-adicionada.jsp"),
-			@Result(name="input", location="/formulario-tarefas.jsp")
+			@Result(name="input", location="formulario-tarefas.jsp")
 	})
 	public String execute() {
 		new TarefaDAO().adiciona(tarefa);
