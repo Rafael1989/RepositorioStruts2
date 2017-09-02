@@ -1,6 +1,8 @@
 package br.com.caelum.tarefas.action;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -17,6 +19,7 @@ import br.com.caelum.tarefas.model.Tarefa;
 				@StringLengthFieldValidator(fieldName="tarefa.descricao", minLength="5", message="Mínimo de 5 caracteres")
 		}
 )
+@ParentPackage("default")
 public class AdicionaTarefasAction extends ActionSupport{
 	
 	private Tarefa tarefa;
@@ -24,6 +27,8 @@ public class AdicionaTarefasAction extends ActionSupport{
 	@Action(value="adicionaTarefa", results= {
 			@Result(name="ok", location="tarefa-adicionada.jsp"),
 			@Result(name="input", location="formulario-tarefas.jsp")
+	}, interceptorRefs= {
+			@InterceptorRef("seguranca")
 	})
 	public String execute() {
 		new TarefaDAO().adiciona(tarefa);

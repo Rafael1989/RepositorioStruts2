@@ -4,8 +4,21 @@
    "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<package name="default" extends="struts-default">
+		<interceptors>
+			<interceptor name="autorizador" class="br.com.caelum.tarefas.interceptor.AutorizadorInterceptor"/>
+			<interceptor-stack name="seguranca">
+				<interceptor-ref name="autorizador"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="naoLogado">/WEB-INF/content/formulario-login.jsp</result>
+		</global-results>
 		<action name="tarefaForm">
 			<result>/WEB-INF/content/formulario-tarefas.jsp</result>
+		</action>
+		<action name="loginForm">
+			<result>/WEB-INF/content/formulario-login.jsp</result>		
 		</action>
 	</package>
 </struts>
